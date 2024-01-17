@@ -1,21 +1,11 @@
-import axios from 'axios';
 import cheerio from 'cheerio';
-import config from './config';
 import * as fs from 'fs';
 import * as path from 'path';
+import scrape from './scrape';
 
 interface ScrapedData {
   timestamp: Date;
   data: any;
-}
-
-async function scrapeMuscles(): Promise<any> {
-  try {
-    const { data } = await axios.get(config.url);
-    return data;
-  } catch (error) {
-    console.error('Error during scraping:', error);
-  }
 }
 
 function saveData(data: any): void {
@@ -43,7 +33,7 @@ async function main() {
     console.log('Using cached data');
   } else {
     console.log('Scraping new data');
-    const newData = await scrapeMuscles();
+    const newData = await scrape();
     saveData(newData);
   }
 }
