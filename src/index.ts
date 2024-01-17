@@ -20,7 +20,7 @@ async function scrapeMuscles(): Promise<any> {
 }
 
 function saveData(data: any): void {
-  const filePath = path.join(__dirname, 'data.json');
+  const filePath = path.join(__dirname, '../data/data.json');
   const dataToSave: ScrapedData = { timestamp: new Date(), data: data };
   fs.writeFileSync(filePath, JSON.stringify(dataToSave, null, 2));
 }
